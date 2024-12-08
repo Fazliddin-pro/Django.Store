@@ -11,6 +11,6 @@ def index(request):
 
 def contact(request):
     context = {
-        'title': 'Contact Us',
+        'title': 'Aranoz - Contact Us',
     }
     return render(request, 'main/contact.html', context)

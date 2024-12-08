@@ -15,3 +15,6 @@
 3) Создал базовыйшаблон для всех осталных шаблонов base.html и унаследовал его в index.html и (about)contact.html
 4) Создал отделный файл urls.py для шаблонов свазанных с именно приложением main и сделал этот urls.py include в главный urls.py
 
+1) Создал приложение Goods
+2) Создал контроллеры и шаблоны Goods 
+3) Создал category.html и product.html
