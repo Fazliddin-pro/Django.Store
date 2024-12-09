@@ -1,21 +1,21 @@
 from django.shortcuts import render
-from django.db.models import Count
-from .models import Categories
+
+from .models import Categories, Products
+
 
 def catalog(request):
-    # Получаем все категории с количеством товаров, связанных с каждой категорией
-    categories = Categories.objects.annotate(total_products=Count('products')).order_by('id') # 'products' - это обратная связь
+
+    goods = Products.objects.all()
 
     context = {
-        'title': 'Aranoz - Catalog',
-        'categories': categories,
+        "title": "Aranoz - Catalog",
+        "goods": goods,
     }
-    return render(request, 'goods/category.html', context)
-
+    return render(request, "goods/catalog.html", context)
 
 
 def product(request):
     context = {
-        'title': 'Aranoz - Product',       
+        "title": "Aranoz - Product",
     }
-    return render(request, 'goods/product.html', context)
+    return render(request, "goods/product.html", context)

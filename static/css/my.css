@@ -1,0 +1,29 @@
+.price-container {
+    margin-top: 10px; /* Отступ сверху для цен */
+    position: relative;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 10px; /* Отступ справа для старой цены */
+    display: inline-block;
+}
+
+.new-price {
+    color: #e74c3c; /* Красный цвет для новой цены */
+    font-weight: bold;
+    display: inline-block;
+    background-color: #fff;
+    padding: 2px 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.price {
+    color: #000; /* Цвет для обычной цены */
+    font-weight: bold;
+}

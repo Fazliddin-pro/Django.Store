@@ -31,4 +31,10 @@ class Products(models.Model):
 
 
     def __str__(self):
-        return f'{self.id} | {self.name} | {self.category}'
+        return f'{self.id} | {self.name} | {self.quantity} | {self.category}'
+
+
+    def get_discounted_price(self):
+        if self.discount > 0:
+            return self.price * (1 - self.discount / 100)
+        return self.price
