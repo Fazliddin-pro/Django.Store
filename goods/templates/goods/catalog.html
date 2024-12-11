@@ -57,7 +57,7 @@
                                     {% tag_categories as categories %}
                                     {% for category in categories %}
                                         <li>
-                                            <a href="#">{{ category.name }}</a>
+                                            <a href="{% url "goods:catalog" category.slug %}">{{ category.name }}</a>
                                             {% if category.total_products %}
                                             <span>({{ category.total_products }})</span>
                                             {% endif %}
@@ -72,89 +72,45 @@
                                 <h3>Product filters</h3>
                             </div>
                             <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
+                                <!-- Форма для отправки GET-запроса -->
+                                <form method="get" action="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'goods:catalog' category_slug %}{% endif %}">
+                                    {% if request.GET.q %}
+                                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                                    {% endif %}
+                                    
+                                    <!-- Радиокнопка с фильтром по имени (по умолчанию) -->
+                                    <input type="radio" name="order_by" id="name_default" value="default" {% if not request.GET.order_by %}checked{% endif %}>
+                                    <label for="name_default" class="radio_label">Default</label>
+                                    <hr>
+                                    
+                                    <!-- Радиокнопка с фильтром по имени (по возрастанию) -->
+                                    <input type="radio" name="order_by" id="name_asc" value="name" {% if request.GET.order_by == 'name' %}checked{% endif %}>
+                                    <label for="name_asc" class="radio_label">Name 👇</label>
+                                    
+                                    <!-- Радиокнопка с фильтром по имени (по убыванию) -->
+                                    <input type="radio" name="order_by" id="name_desc" value="-name" {% if request.GET.order_by == '-name' %}checked{% endif %}>
+                                    <label for="name_desc" class="radio_label">Name 👆</label>
+                                    <hr>
+                                    
+                                    <!-- Радиокнопка с фильтром по цене (по возрастанию) -->
+                                    <input type="radio" name="order_by" id="price_asc" value="price" {% if request.GET.order_by == 'price' %}checked{% endif %}>
+                                    <label for="price_asc" class="radio_label">Price 👇</label>
+                                    
+                                    <!-- Радиокнопка с фильтром по цене (по убыванию) -->
+                                    <input type="radio" name="order_by" id="price_desc" value="-price" {% if request.GET.order_by == '-price' %}checked{% endif %}>
+                                    <label for="price_desc" class="radio_label">Price 👆</label>
+                                    <hr>
+                                    
+                                    <!-- Чекбокс "Только товары со скидкой" -->
+                                    <input type="checkbox" name="on_sale" id="discount" value="true" {% if request.GET.on_sale %}checked{% endif %}>
+                                    <label for="discount" class="radio_label">On Sale</label>
+                                    
+                                    <!-- Кнопка отправки формы -->
+                                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                                </form>                                                              
                             </div>
                         </aside>
-
-                        <aside class="left_widgets p_filter_widgets">
-                            <div class="l_w_title">
-                                <h3>Color Filter</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Black</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Black Leather</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Black with red</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Gold</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Spacegrey</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
-
-                        <aside class="left_widgets p_filter_widgets price_rangs_aside">
-                            <div class="l_w_title">
-                                <h3>Price Filter</h3>
-                            </div>
-                            <div class="widgets_inner">
-                                <div class="range_item">
-                                    <!-- <div id="slider-range"></div> -->
-                                    <input type="text" class="js-range-slider" value="" />
-                                    <div class="d-flex">
-                                        <div class="price_text">
-                                            <p>Price :</p>
-                                        </div>
-                                        <div class="price_value d-flex justify-content-center">
-                                            <input type="text" class="js-input-from" id="amount" readonly />
-                                            <span>to</span>
-                                            <input type="text" class="js-input-to" id="amount" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
+                                            
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -165,33 +121,31 @@
                                     <p><span>{{ goods.count }} </span> Prodict Found</p>
                                 </div>
                                 <div class="single_product_menu d-flex">
-                                    <h5>short by : </h5>
-                                    <select>
-                                        <option data-display="Select">name</option>
-                                        <option value="1">price</option>
-                                        <option value="2">product</option>
-                                    </select>
-                                </div>
-                                <div class="single_product_menu d-flex">
                                     <h5>show :</h5>
                                     <div class="top_pageniation">
                                         <ul>
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
+                                        {% for page_num in goods.paginator.page_range %}
+                                            {% if page_num == goods.number %}
+                                                <li><span>{{ page_num }}</span></li>
+                                            {% elif page_num >= goods.number|add:-2 and page_num <= goods.number|add:2 %}
+                                                <li><a href="?{% change_params page=page_num %}">{{ page_num }}</a></li>
+                                            {% elif page_num == 1 and goods.number > 3 %}
+                                                <li><span>...</span></li>
+                                            {% elif page_num == goods.paginator.num_pages and goods.number < goods.paginator.num_pages|add:-2 %}
+                                                <li><span>...</span></li>
+                                            {% endif %}
+                                        {% endfor %}
                                         </ul>
-                                    </div>
+                                    </div>                                                                                                                                                
                                 </div>
                                 <div class="single_product_menu d-flex">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="search"
-                                            aria-describedby="inputGroupPrepend">
+                                    <form action="{% url "catalog:search" %}" method="GET" class="input-group">
+                                        <input type="text" name="q" class="form-control" placeholder="search" aria-describedby="inputGroupPrepend">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="ti-search"></i></span>
                                         </div>
-                                    </div>
-                                </div>
+                                    </form>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -200,14 +154,15 @@
                         {% for product in goods %}
                             <div class="col-lg-4 col-sm-6">
                                 <div class="single_product_item">
-                                    {% if product.image %}
-                                        <img src="{{ product.image.url }}" alt="">
-                                    {% else %}
-                                        <img src="{% static "img/no-image.jpg" %}" alt="">
-                                    {% endif %}
+                                    <a href="{% url "goods:product" product.slug %}">
+                                        {% if product.image %}
+                                            <img src="{{ product.image.url }}" alt="">
+                                        {% else %}
+                                            <img src="{% static 'img/no-image.jpg' %}" alt="">
+                                        {% endif %}
+                                    </a>
                                     <div class="single_product_text">
                                         <h4>{{ product.name }}</h4>
-                                        
                                         <div class="price-container">
                                             {% if product.discount > 0 %}
                                                 <h3 class="old-price">₽{{ product.price }}</h3>
@@ -216,13 +171,12 @@
                                                 <h3 class="price">₽{{ product.price }}</h3>
                                             {% endif %}
                                         </div>
-                                        
                                         <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
-                    </div>                                                           
+                    </div>                                                                                                
                     {% comment %} <div class="row align-items-center latest_product_inner">
                         {% for product in goods %}
                             <div class="col-lg-4 col-sm-6">

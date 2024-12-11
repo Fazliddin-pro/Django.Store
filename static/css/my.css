@@ -27,3 +27,56 @@
     color: #000; /* Цвет для обычной цены */
     font-weight: bold;
 }
+
+
+/* Скрываем стандартные радиокнопки */
+input[type="radio"] {
+    display: none; /* Прячем стандартные радиокнопки */
+}
+
+/* Стили для меток с кастомными кнопками */
+.radio_label {
+    margin: 0, auto;
+    width: 80%;
+    text-align: center;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px; /* Немного отступа снизу для лучшего вида */
+}
+
+/* Эффект при наведении на невыбранную кнопку */
+input[type="radio"]:not(:checked) + .radio_label:hover {
+    background-color: #ddd;
+}
+
+/* Стиль для выбранной кнопки */
+input[type="radio"]:checked + .radio_label {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+/* Стиль для кнопки "Apply Filters" */
+button[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Эффект при наведении на кнопку */
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
