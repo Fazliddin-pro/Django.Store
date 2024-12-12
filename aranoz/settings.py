@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     'debug_toolbar',
+    'phonenumber_field',
+    'django_countries',
 
     'main',
     'goods',
@@ -147,3 +149,8 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+AUTH_USER_MODEL = 'users.User'
+
+
+PHONENUMBER_DB_FORMAT = 'E164'  # Формат для хранения телефонных номеров
+PHONENUMBER_DEFAULT_REGION = 'UZ'  # Регион по умолчанию (Узбекистан)

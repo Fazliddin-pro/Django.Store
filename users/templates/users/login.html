@@ -59,12 +59,12 @@
                             <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                                 {% csrf_token %}
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="name" value=""
-                                        placeholder="Username">
+                                    <input type="text" class="form-control" id="id_name" name="username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+                                        placeholder="Username" required>
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""
-                                        placeholder="Password">
+                                    <input type="password" class="form-control" id="id_password" name="password" value=""
+                                        placeholder="Password" required>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
