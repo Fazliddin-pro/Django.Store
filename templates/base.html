@@ -38,11 +38,11 @@
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="login.html"> login</a>
+                                    <a class="dropdown-item" href="{% url "user:login" %}"> login</a>
                                     <a class="dropdown-item" href="tracking.html">tracking</a>
-                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
+                                    <a class="dropdown-item" href="{% url "user:checkout" %}">product checkout</a>
                                     <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                    <a class="dropdown-item" href="confirmation.html">confirmation</a>
+                                    <a class="dropdown-item" href="#">confirmation</a>
                                     <a class="dropdown-item" href="{% url "admin:index" %}">Admin Panel</a>
                                 </div>
                             </li>                     
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div class="search_input" id="search_input_box">
+    {% comment %} <div class="search_input" id="search_input_box">
         <div class="container ">
             <form class="d-flex justify-content-between search-inner">
                 <input type="text" class="form-control" id="search_input" placeholder="Search Here">
@@ -79,7 +79,7 @@
                 <span class="ti-close" id="close_search" title="Close Search"></span>
             </form>
         </div>
-    </div>
+    </div> {% endcomment %}
 </header>
 
 {% block head %}
