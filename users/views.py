@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, UserRegistrationForm
+from users.models import User
 
 
 def login(request):
@@ -27,8 +28,22 @@ def login(request):
 
 
 def registration(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.instance
+            auth.login(request, user)  # Авторизация после регистрации
+            return HttpResponseRedirect(reverse('main:index'))  # Перенаправление на страницу логина
+    else:
+        form = UserRegistrationForm()
+    
+    countries = User._meta.get_field('country').choices
+
     context = {
         'title': 'Aranoz - Registration',
+        'countries': countries,
+        'form': form,
     }
     return render(request, 'users/registration.html', context)
 
@@ -41,4 +56,5 @@ def checkout(request):
 
 
 def logout(request):
-    pass
+    auth.logout(request)
+    return redirect(reverse('main:index'))
