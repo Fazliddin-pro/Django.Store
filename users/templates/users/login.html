@@ -58,6 +58,9 @@
                                 Please Sign in now</h3>
                             <form class="row contact_form" action="{% url "user:login" %}" method="post">
                                 {% csrf_token %}
+                                {% if request.GET.next %}
+                                    <input type="hidden" name="next" value="{{request.GET.next}}">
+                                {% endif %}
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="id_name" name="username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
                                         placeholder="Username" required>

@@ -154,3 +154,5 @@ AUTH_USER_MODEL = 'users.User'
 
 PHONENUMBER_DB_FORMAT = 'E164'  # Формат для хранения телефонных номеров
 PHONENUMBER_DEFAULT_REGION = 'UZ'  # Регион по умолчанию (Узбекистан)
+
+LOGIN_URL = '/user/login/'
