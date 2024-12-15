@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="icon" href="{% static "img/favicon.png" %}">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+<!-- animate CSS -->
+<link rel="stylesheet" href="{% static "css/animate.css" %}">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+<!-- nice select CSS -->
+<link rel="stylesheet" href="{% static "css/nice-select.css" %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static "css/all.css" %}">
+<!-- flaticon CSS -->
+<link rel="stylesheet" href="{% static "css/flaticon.css" %}">
+<link rel="stylesheet" href="{% static "css/themify-icons.css" %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+<!-- swiper CSS -->
+<link rel="stylesheet" href="{% static "css/slick.css" %}">
+<link rel="stylesheet" href="{% static "css/price_rangs.css" %}">
+<!-- style CSS -->
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock %}
+
+{% block content %}
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Cart Products</h2>
+                        <p>Home <span>-</span>Cart Products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cart_area padding_top">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{% static "img/product/single-product/cart-1.jpg" %}" alt="" />
+                                    </div>
+                                    <div class="media-body">
+                                        <p>Minimalistic shop for multipurpose use</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>$360.00</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+                                    <span class="input-number-decrement"><i class="ti-angle-down"></i></span>
+                                    <input class="input-number" type="text" value="1" min="0" max="10">
+                                    <span class="input-number-increment"><i class="ti-angle-up"></i></span>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>$720.00</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td>
+                                <h5>$2160.00</h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="checkout_btn_inner float-right pb-5">
+                    <a class="btn_1" href="{% url 'goods:catalog' category_slug='all' %}">Continue Shopping</a>
+                    <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+  <!-- jquery -->
+  <script src="{% static "js/jquery-1.12.1.min.js" %}"></script>
+  <!-- popper js -->
+  <script src="{% static "js/popper.min.js" %}"></script>
+  <!-- bootstrap js -->
+  <script src="{% static "js/bootstrap.min.js" %}"></script>
+  <!-- easing js -->
+  <script src="{% static "js/jquery.magnific-popup.js" %}"></script>
+  <!-- swiper js -->
+  <script src="{% static "js/swiper.min.js" %}"></script>
+  <!-- swiper js -->
+  <script src="{% static "js/masonry.pkgd.js" %}"></script>
+  <!-- particles js -->
+  <script src="{% static "js/owl.carousel.min.js" %}"></script>
+  <script src="{% static "js/jquery.nice-select.min.js" %}"></script>
+  <!-- slick js -->
+  <script src="{% static "js/slick.min.js" %}"></script>
+  <script src="{% static "js/jquery.counterup.min.js" %}"></script>
+  <script src="{% static "js/waypoints.min.js" %}"></script>
+  <script src="{% static "js/contact.js" %}"></script>
+  <script src="{% static "js/jquery.ajaxchimp.min.js" %}"></script>
+  <script src="{% static "js/jquery.form.js" %}"></script>
+  <script src="{% static "js/jquery.validate.min.js" %}"></script>
+  <script src="{% static "js/mail-script.js" %}"></script>
+  <script src="{% static "js/stellar.js" %}"></script>
+  <script src="{% static "js/price_rangs.js" %}"></script>
+  <!-- custom js -->
+  <script src="{% static "js/custom.js" %}"></script>
+{% endblock js %}
