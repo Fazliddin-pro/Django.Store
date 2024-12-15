@@ -40,11 +40,10 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                     {% if user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'user:logout' %}"> logout</a>
+                                        <a class="dropdown-item" href="{% url 'user:checkout' %}">product checkout</a>
                                     {% else %}
                                         <a class="dropdown-item" href="{% url 'user:login' %}"> login</a>
                                     {% endif %}
-                                    <a class="dropdown-item" href="tracking.html">tracking</a>
-                                    <a class="dropdown-item" href="{% url 'user:checkout' %}">product checkout</a>
                                     <a class="dropdown-item" href="cart.html">shopping cart</a>
                                     <a class="dropdown-item" href="#">confirmation</a>
                                 

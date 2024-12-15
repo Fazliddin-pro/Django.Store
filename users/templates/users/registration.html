@@ -26,7 +26,7 @@
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3>Hi! Please, Write your data!</h3>
-                            <form class="row contact_form" action="{% url 'user:registration' %}" method="post">
+                            <form class="row contact_form" action="{% url 'user:registration' %}" method="post" novalidate="novalidate">
                                 {% csrf_token %}
 
                                 <!-- Row 1 -->

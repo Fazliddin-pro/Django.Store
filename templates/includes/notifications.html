@@ -30,3 +30,54 @@
     });
   </script>
 {% endif %}
+
+
+{% if messages %}
+    <!-- Для оповещений -->
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success position-fixed top-0 start-50 translate-middle-x z-3" role="alert">
+                {{ message }}
+            </div>
+        {% elif message.tags == 'warning' %}
+            <div class="alert alert-danger position-fixed top-0 start-50 translate-middle-x z-3" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
+    </div>
+{% endif %}
+
+<style>
+    .alert {
+        width: auto;
+        max-width: 500px;
+        padding: 15px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .position-fixed {
+        position: fixed !important;
+        top: 20px; /* Отступ сверху */
+        left: 50%; /* Центрируем по горизонтали */
+        transform: translateX(-50%); /* Убираем смещение */
+        z-index: 1050;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            const notifications = document.querySelectorAll('.alert');
+            notifications.forEach((notification) => {
+                notification.style.opacity = 0; // Скрываем уведомление
+                setTimeout(() => notification.remove(), 500); // Удаляем элемент из DOM
+            });
+        }, 3000); // Удаляем уведомление через 3 секунды
+    });
+</script>

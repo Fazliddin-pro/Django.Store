@@ -34,8 +34,32 @@ class UserRegistrationForm(UserCreationForm):
     username = forms.CharField()
     email = forms.CharField()
     phone_number = forms.CharField()
-    country = forms.CharField()
-    address = forms.CharField()
+    country = forms.CharField(required=False, empty_value='Uzbekistan')
+    address = forms.CharField(required=False)
     password1 = forms.CharField()
     password2 = forms.CharField()
 
+
+class CheckoutForm(UserChangeForm):
+
+    class Meta:
+        model = User
+        fields = (
+            'image',
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'phone_number',
+            'country',
+            'address',
+        )
+
+    image = forms.ImageField(required=False)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    username = forms.CharField()
+    email = forms.CharField()
+    phone_number = forms.CharField()
+    country = forms.CharField(required=False, empty_value='Uzbekistan')
+    address = forms.CharField(required=False)
