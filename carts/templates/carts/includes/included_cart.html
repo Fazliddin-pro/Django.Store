@@ -61,7 +61,7 @@
     {% if carts %}
         <div class="d-flex justify-content-between">
             <a class="btn_3 mt-4" style="background-color: #32CD32;border:0" href="{% url "user:users_cart" %}">Change</a>  <!-- Изменён фон кнопки -->
-            <a class="btn_3 mt-4" href="">Buy</a>
+            <a class="btn_3 mt-4" href="{% url "orders:create_order" %}">Buy</a>
         </div>
     {% else %}
         <a class="btn btn_3 mt-4" style="background-color: #00BFFF;border:0" href="{% url "goods:catalog" 'all' %}">Catalog</a>
