@@ -21,8 +21,22 @@ def cart_add(request, product_slug):
     return redirect(request.META['HTTP_REFERER'])
 
 
-def cart_change(request, product_slug):
-    ...
+def cart_change(request, cart_id, simvol):
+    cart = Cart.objects.get(id=cart_id)
+    max_quantity = cart.product.quantity
+
+    if simvol == '+':
+        if cart.quantity < max_quantity:
+            cart.quantity += 1
+            cart.save()
+    elif simvol == '-' and cart.quantity > 1:
+        cart.quantity -= 1
+        cart.save()
+    else:
+        cart.delete()
+
+    return redirect(request.META['HTTP_REFERER'])
+
 
 def cart_remove(request, cart_id):
     

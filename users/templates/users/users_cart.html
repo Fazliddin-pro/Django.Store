@@ -62,7 +62,7 @@
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img width="150" src="{% if cart.product.image %}{{ cart.product.image.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}" alt="" />
+                                            <img width="150" src="{% if cart.product.image %}{{ cart.product.image.url }}{% else %}{% static 'img/no-image.jpg' %}{% endif %}" alt="" />
                                         </div>
                                         <div class="media-body">
                                             <p>{{ cart.product.name }}</p>
@@ -74,9 +74,13 @@
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <span class="input-number-decrement"><i class="ti-angle-down"></i></span>
-                                        <input class="input-number" type="text" value="{{ cart.quantity }}" min="0" max="{{ cart.product.quantity }}">
-                                        <span class="input-number-increment"><i class="ti-angle-up"></i></span>
+                                        <a href="{% url 'cart:cart_change' cart.id '-' %}" class="input-number-decrement">
+                                            <i class="ti-angle-down"></i>
+                                        </a>
+                                        <input class="input-number" type="text" value="{{ cart.quantity }}" min="1" max="{{ cart.product.quantity }}">
+                                        <a href="{% url 'cart:cart_change' cart.id '+' %}" class="input-number-increment">
+                                            <i class="ti-angle-up"></i>
+                                        </a>
                                     </div>
                                 </td>
                                 <td>
@@ -99,6 +103,7 @@
                             </td>
                         </tr>
                     </tbody>
+                    
                 </table>
                 <div class="checkout_btn_inner float-right pb-5">
                     <a class="btn_1" href="{% url 'goods:catalog' category_slug='all' %}">Continue Shopping</a>
