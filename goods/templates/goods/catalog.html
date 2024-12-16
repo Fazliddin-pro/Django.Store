@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="{% static "css/my.css"  %}">
 {% endblock css %}
 
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock modal_cart %}
+
 {% block content %}
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -171,7 +175,7 @@
                                                 <h3 class="price">₽{{ product.price }}</h3>
                                             {% endif %}
                                         </div>
-                                        <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                        <a href="{% url "cart:cart_add" product.slug %}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                     </div>
                                 </div>
                             </div>

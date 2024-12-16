@@ -36,5 +36,5 @@ class Products(models.Model):
 
     def get_discounted_price(self):
         if self.discount > 0:
-            return self.price * (1 - self.discount / 100)
+            return round(self.price * (1 - self.discount / 100), 2)
         return self.price

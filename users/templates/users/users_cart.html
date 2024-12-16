@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load carts_tags %}
 
 {% block css %}
 <link rel="icon" href="{% static "img/favicon.png" %}">
@@ -46,6 +47,7 @@
         <div class="cart_inner">
             <div class="table-responsive">
                 <table class="table">
+                    {% user_carts request as carts %}
                     <thead>
                         <tr>
                             <th scope="col">Product</th>
@@ -55,39 +57,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="{% static "img/product/single-product/cart-1.jpg" %}" alt="" />
+                        {% for cart in carts %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img width="150" src="{% if cart.product.image %}{{ cart.product.image.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}" alt="" />
+                                        </div>
+                                        <div class="media-body">
+                                            <p>{{ cart.product.name }}</p>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
+                                </td>
+                                <td>
+                                    <h5>₽{{ cart.product.get_discounted_price }}</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <span class="input-number-decrement"><i class="ti-angle-down"></i></span>
+                                        <input class="input-number" type="text" value="{{ cart.quantity }}" min="0" max="{{ cart.product.quantity }}">
+                                        <span class="input-number-increment"><i class="ti-angle-up"></i></span>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <span class="input-number-decrement"><i class="ti-angle-down"></i></span>
-                                    <input class="input-number" type="text" value="1" min="0" max="10">
-                                    <span class="input-number-increment"><i class="ti-angle-up"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <h5>₽{{ cart.products_price }}</h5>
+                                </td>
+                            </tr>
+                        {% endfor %}
                         <tr>
                             <td></td>
                             <td></td>
                             <td>
-                                <h5>Subtotal</h5>
+                                <h5>{{ carts.total_quantity }}</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
+                                <h5>₽{{ carts.total_price }}</h5>
                             </td>
                         </tr>
                     </tbody>

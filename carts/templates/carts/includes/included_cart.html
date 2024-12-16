@@ -1,3 +1,4 @@
+{% load static %}
 
 <div class="order_box">
     <h2>Your Order</h2>
@@ -7,39 +8,20 @@
                 <span>Total</span>
             </a>
         </li>
-        <li>
-            <a href="#">Fresh Blackberry
-                <span class="middle">x 02</span>
-                <span class="last">$720.00</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">Fresh Tomatoes
-                <span class="middle">x 02</span>
-                <span class="last">$720.00</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">Fresh Broccoli
-                <span class="middle">x 02</span>
-                <span class="last">$720.00</span>
-            </a>
-        </li>
+        {% for cart in carts %}
+            <li>
+                <a href="#">{{ cart.product.name }}
+                    <span class="middle">x {{ cart.quantity }}</span>
+                    <span class="last">₽{{ cart.products_price }}</span>
+                </a>
+            </li>
+        {% endfor %}
     </ul>
+    <strong >Total</strong>
     <ul class="list list_2">
         <li>
-            <a href="#">Subtotal
-                <span>$2160.00</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">Shipping
-                <span>Flat rate: $50.00</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">Total
-                <span>$2210.00</span>
+            <a href="#">Total: x {{ carts.total_quantity }}
+                <span>₽{{ carts.total_price }}</span>
             </a>
         </li>
     </ul>

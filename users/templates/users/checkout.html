@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load carts_tags %}
 
 {% block css %}
     <link rel="icon" href="{% static "img/favicon.png" %}">
@@ -152,6 +153,7 @@
                             </div>
                         </form>
                     </div>
+                    {% user_carts request as carts %}
                     <div class="col-lg-4">
                         {% include "carts/includes/included_cart.html" %}
                     </div>
