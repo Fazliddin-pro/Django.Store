@@ -80,7 +80,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>₽{{ cart.products_price }}</h5>
+                                    <h5>₽{{ cart.products_price }}
+                                        <a href="{% url 'cart:cart_remove' cart.id %}" class="text-danger ml-3">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </h5>
                                 </td>
                             </tr>
                         {% endfor %}
